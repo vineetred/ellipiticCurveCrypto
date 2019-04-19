@@ -55,9 +55,12 @@ def pointDoubling(arg1):
     return [x_r,y_r]
 
 def multiplePoint(numbers,times):
-    for i in range(0,times):
-        newNumbers = pointDoubling([numbers])
+    newNumbers = pointDoubling(numbers)
+    for i in range(0,times-1):
+        newNumbers = addition(newNumbers,numbers)
+    return newNumbers
 print(pointDoubling([1,3]))
+print(multiplePoint([1,3],5))
 
 # print(addition([1,3],[4,2]))
 
