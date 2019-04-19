@@ -4,6 +4,11 @@ p = 5
 a = 4
 b = 4
 
+def bits(n):
+    while n:
+        yield n & 1
+        n >>= 1
+
 infinity = [-1,-1]
 def inv(e,phi):
     def ext_GCD(e_KEY, mod_PHI):
@@ -54,13 +59,26 @@ def pointDoubling(arg1):
     # arg1[1] = y_r
     return [x_r,y_r]
 
-def multiplePoint(numbers,times):
-    newNumbers = pointDoubling(numbers)
-    for i in range(0,times-1):
-        newNumbers = addition(newNumbers,numbers)
-    return newNumbers
-print(pointDoubling([1,3]))
-print(multiplePoint([1,3],5))
+# def multiplePoint(numbers,times):
+#     newNumbers = pointDoubling(numbers)
+#     for i in range(0,times-1):
+#         newNumbers = addition(newNumbers,numbers)
+#     return newNumbers
+# print(pointDoubling([1,3]))
+# print(multiplePoint([1,3],5))
+
+def multiplePoint(N,times):
+    Q = [-1,-1]
+    d = []
+    for bit in bits(times):
+        d.append(bit)
+    for i in range(0,len(d)):
+        if(d[i]==1):
+            Q = addition(Q,N)
+        N = pointDoubling(N)
+    return Q
+
+print(multiplePoint([0,2],4))
 
 # print(addition([1,3],[4,2]))
 
