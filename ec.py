@@ -1,15 +1,16 @@
 import numpy as np
 import math
-p = 5
-a = 4
-b = 4
+
+p = 59
+a = 17
+b = 5
+infinity = [-1,-1]
 
 def bits(n):
     while n:
         yield n & 1
         n >>= 1
 
-infinity = [-1,-1]
 def inv(e,phi):
     def ext_GCD(e_KEY, mod_PHI):
         if (e_KEY == 0):
@@ -42,30 +43,17 @@ def addition(arg1,arg2):
 
     if(arg1[0]!=arg2[0]):
         inverse = inv(arg2[0]-arg1[0],p)
-        slope = int(arg2[1]-arg1[1])*inverse
-        slope = int(slope)
-        x_r = int((pow(slope,2) - arg1[0] - arg2[0])%p)
+        slope = ((arg2[1]-arg1[1])*inverse)%p
+        x_r = (pow(slope,2) - arg1[0] - arg2[0])%p
         y_r = (slope*(arg1[0]-x_r) - arg1[1])%p
         return [x_r,y_r]
-
 
 def pointDoubling(arg1):
     inverse = inv(2*arg1[1],p)
     slope = (3*pow(arg1[0],2)+a)*inverse
-    # slope=math.ceil(slope)
-    x_r = (int(pow(slope,2)-2*arg1[0]))%p
+    x_r = (pow(slope,2)-(2*arg1[0]))%p
     y_r = (int(slope*(arg1[0]-x_r)-arg1[1]))%p
-    # arg1[0] = x_r
-    # arg1[1] = y_r
     return [x_r,y_r]
-
-# def multiplePoint(numbers,times):
-#     newNumbers = pointDoubling(numbers)
-#     for i in range(0,times-1):
-#         newNumbers = addition(newNumbers,numbers)
-#     return newNumbers
-# print(pointDoubling([1,3]))
-# print(multiplePoint([1,3],5))
 
 def multiplePoint(N,times):
     Q = [-1,-1]
@@ -78,13 +66,12 @@ def multiplePoint(N,times):
         N = pointDoubling(N)
     return Q
 
-print(multiplePoint([0,2],4))
-
-# print(addition([1,3],[4,2]))
-
-
 def functionOutput(x):
     y = (x**3+a*x+b)%p
     return int(math.sqrt(y))
-# print(functionOutput(1))
+
+print(multiplePoint([4,14],5))
+
+# print(addition([2,0],[1,2]))
+
 
