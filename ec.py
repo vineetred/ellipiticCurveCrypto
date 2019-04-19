@@ -1,9 +1,13 @@
 import numpy as np
 import math
 
-p = 59
-a = 17
-b = 5
+file = open("variables.txt", 'r')
+contents = file.read().split(" ")
+file.close()
+p = int(contents[0])
+a = int(contents[1])
+b = int(contents[2])
+
 infinity = [-1,-1]
 
 def bits(n):
@@ -72,4 +76,5 @@ def negationPoint(point):
 def subtractionPoint(point1,point2):
     return addition(point1,negationPoint(point2))
 
-print(multiplePoint([4,14],5))
+print(multiplePoint([4,14],2))
+print(subtractionPoint([4,14],[8,2]))
