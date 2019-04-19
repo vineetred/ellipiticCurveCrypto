@@ -66,12 +66,10 @@ def multiplePoint(N,times):
         N = pointDoubling(N)
     return Q
 
-def functionOutput(x):
-    y = (x**3+a*x+b)%p
-    return int(math.sqrt(y))
+def negationPoint(point):
+    return [point[0],-point[1]]
+
+def subtractionPoint(point1,point2):
+    return addition(point1,negationPoint(point2))
 
 print(multiplePoint([4,14],5))
-
-# print(addition([2,0],[1,2]))
-
-
