@@ -99,9 +99,15 @@ def functionCheck(xcord):
 # print(multiplePoint([4,14],3))
 print(addition([8,2],[4,14]))
 print(addition([4,14],[8,2]))
+print(subtractionPoint([4,14],[8,2]))
 # print(functionCheck(56))
 # print(negationPoint([1,2]))
 
-def check_EC(x,y): #function to check if given co-ordinates are part of EC or not
-    
-    return ((y**2 - (x**3 + a*x + b)) % p == 0 and 0 <= x < p and 0 <= y < p)
+def check_EC(point): #function to check if given co-ordinates are part of EC or not
+    x,y = point
+    if(x>p or x<0 or y>p or y<0):
+        return False
+    flag = ((y**2 - (x**3 + a*x + b)))%p==0
+    return flag
+
+print(check_EC([4,12]))
